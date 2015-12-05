@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         The Goatscript
 // @namespace    http://0chan.cf/
-// @version      0.1
+// @version      0.1.1
 // @description  Shows hidden posts on www.0-chan.ru
 // @icon         https://raw.github.com/Juribiyan/goat-script/master/icon.png
 // @updateURL    https://raw.github.com/Juribiyan/goat-script/master/goatscript.meta.js
@@ -114,9 +114,9 @@ var gs = {
 $(document).ready(function() {
   if(!localStorage.hasOwnProperty('GS_showHiddenPosts'))
     localStorage['GS_showHiddenPosts'] = true;
-  var on = (localStorage['GS_showHiddenPosts'] || false) ? 'gs-on' : 'gs-off';
+  var on = localStorage['GS_showHiddenPosts'] || false;
   $('body').append(
-  '<div id="gs-container" class="'+on+'">\
+  '<div id="gs-container" class="'+(on ? 'gs-on' : 'gs-off')+'">\
     <div id="gs-head" title="Вкл/Выкл">\
       <img src=\''+logo+'\'>\
       <div id="gs-indicator"></div>\
