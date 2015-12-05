@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         The Goatscript
 // @namespace    http://0chan.cf/
-// @version      0.1.1
+// @version      0.1.2
 // @description  Shows hidden posts on www.0-chan.ru
 // @icon         https://raw.github.com/Juribiyan/goat-script/master/icon.png
 // @updateURL    https://raw.github.com/Juribiyan/goat-script/master/goatscript.meta.js
@@ -100,11 +100,13 @@ var gs = {
     injector.inject('gs-unshade', '.shady {display: block!important}');
     $('#gs-container').removeClass('gs-off').addClass('gs-on');
     this.on = true;
+    localStorage['GS_showHiddenPosts'] = 1;
   },
   hide: function() {
     injector.remove('gs-unshade');
     $('#gs-container').removeClass('gs-on').addClass('gs-off');
     this.on = false;
+    localStorage['GS_showHiddenPosts'] = 0;
   },
   toggle: function() {
     if(this.on) this.hide(); else this.show();
@@ -114,7 +116,7 @@ var gs = {
 $(document).ready(function() {
   if(!localStorage.hasOwnProperty('GS_showHiddenPosts'))
     localStorage['GS_showHiddenPosts'] = true;
-  var on = localStorage['GS_showHiddenPosts'] || false;
+  var on = +(localStorage['GS_showHiddenPosts'] || 1);
   $('body').append(
   '<div id="gs-container" class="'+(on ? 'gs-on' : 'gs-off')+'">\
     <div id="gs-head" title="Вкл/Выкл">\
