@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         The Goatscript
-// @namespace    http://0chan.cf/
-// @version      0.1.2
+// @namespace    http://0chan.one/
+// @version      0.2
 // @description  Shows hidden posts on www.0-chan.ru
 // @icon         https://raw.github.com/Juribiyan/goat-script/master/icon.png
 // @updateURL    https://raw.github.com/Juribiyan/goat-script/master/goatscript.meta.js
@@ -97,7 +97,7 @@ var gs = {
     else this.hide();
   },
   show: function() {
-    injector.inject('gs-unshade', '.shady {display: block!important}');
+    injector.inject('gs-unshade', '.shady, span[id^="unhidethread"][style="display: none;"]+div[id^="thread"][style="display: none"] {display: block!important}');
     $('#gs-container').removeClass('gs-off').addClass('gs-on');
     this.on = true;
     localStorage['GS_showHiddenPosts'] = 1;
