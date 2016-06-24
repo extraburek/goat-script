@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         The Goatscript
-// @namespace    http://0chan.one/
-// @version      0.2
+// @namespace    http://0chan.cf/
+// @version      0.2.1
 // @description  Shows hidden posts on www.0-chan.ru
 // @icon         https://raw.github.com/Juribiyan/goat-script/master/icon.png
 // @updateURL    https://raw.github.com/Juribiyan/goat-script/master/goatscript.meta.js
@@ -82,22 +82,21 @@ injector.inject('GS_UI',
   line-height: 25px;\
   padding: 0 5px;\
 }\
-.shady .shady .reply {\
+.shady .reply {\
   background: #F1C7C7;\
   border-color: #DE9494;\
 }');
 
 var gs = {
   init: function(on) {
-    $('.shady').parent().addClass('shady');
-    var hiddenReplies = $('.shady .shady .reply').length,
-    hiddenThreads = $('.shady div[id^=replies]').length;
+    var hiddenReplies = $('div[id^=replies] .shady').length,
+    hiddenThreads = $('.shady').length - hiddenReplies;
     $('#gs-counter').text(hiddenThreads+'/'+hiddenReplies);
     if(on) this.show(); 
     else this.hide();
   },
   show: function() {
-    injector.inject('gs-unshade', '.shady, span[id^="unhidethread"][style="display: none;"]+div[id^="thread"][style="display: none"] {display: block!important}');
+    injector.inject('gs-unshade', '.shady, span[id^="unhidethread"][style="display: none;"]+div:not(.de-thr-hid)[style^="display: none"], input[type=hidden]+div[style^="display: none"] {display: block!important} ');
     $('#gs-container').removeClass('gs-off').addClass('gs-on');
     this.on = true;
     localStorage['GS_showHiddenPosts'] = 1;
