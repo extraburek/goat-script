@@ -18,7 +18,7 @@ const selectAll = s => document.querySelectorAll(s);
 
 var injector = {
   inject: function (alias, css) {
-    var head = document.head || select('head'),
+    var head = document.head || document.getElementsByTagName("head")[0],
       style = document.createElement('style');
     style.type = 'text/css';
     style.id = 'injector:' + alias;
