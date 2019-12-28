@@ -15,10 +15,11 @@
 const getById = id => document.getElementById(id);
 const select = s => document.querySelector(s);
 const selectAll = s => document.querySelectorAll(s);
+const byTag = tag => document.getElementsByTagName(tag);
 
 var injector = {
   inject: function (alias, css) {
-    var head = document.head || select('head'),
+    var head = document.head || byTag("head")[0],
       style = document.createElement('style');
     style.type = 'text/css';
     style.id = 'injector:' + alias;
@@ -32,7 +33,7 @@ var injector = {
   remove: function (alias) {
     var style = getById('injector:' + alias);
     if (style) {
-      var head = document.head || select('head');
+      var head = document.head || byTag('head')[0];
       if (head) {
         head.removeChild(getById('injector:' + alias));
       }
